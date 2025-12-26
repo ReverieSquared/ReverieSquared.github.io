@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .wrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 260px;
+        padding: 24px;
+        box-sizing: border-box;
+        background: #f5f5f5;
+        border-right: 1px solid #ddd;
+      }
+
+      .sidebar h1 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        color: #1a4c8f;
+      }
+
+      .sidebar p {
+        margin: 0 0 16px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .nav {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0 0;
+      }
+
+      .nav li {
+        margin-bottom: 8px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #007acc;
+        font-size: 14px;
+      }
+
+      .nav a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        flex: 1;
+        padding: 32px;
+        box-sizing: border-box;
+      }
+
+      .content h1 {
+        margin-top: 0;
+      }
+
+      .post-meta {
+        margin: 0 0 8px;
+        color: #777;
+        font-size: 0.9rem;
+      } 
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+<aside class="sidebar">
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+
+  <nav>
+    <h2 class="sidebar-section">Navigation</h2>
+    <ul class="nav">
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li><a href="{{ '/blog' | relative_url }}">All posts</a></li>
+    </ul>
+
+    <h2 class="sidebar-section">About</h2>
+    <ul class="nav">
+      <li><a href="{{ '/about' | relative_url }}">Curriculum vitae</a></li>
+    </ul>
+
+  </nav>
+</aside>
+
+      <main class="content">
+        {{ content }}
+      </main>
+    </div>
+  </body>
+</html>
+
