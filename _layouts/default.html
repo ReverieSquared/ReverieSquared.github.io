@@ -1,102 +1,235 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
       body {
         margin: 0;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #222;
+	background: #f3f4f6;
       }
 
-      .wrapper {
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .sidebar {
-        width: 260px;
-        padding: 24px;
+      .page {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 40px 140px 80px;
         box-sizing: border-box;
-        background: #f5f5f5;
-        border-right: 1px solid #ddd;
+	background: #ffffff;
+	border-radius: 14px;
+	box-shadow: 0 18px 40px rgba(0,0,0,0.06);
       }
 
-      .sidebar h1 {
-        margin: 0 0 8px;
-        font-size: 24px;
-        color: #1a4c8f;
+      .main-grid {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 20px;
       }
 
-      .sidebar p {
+      @media (max-width: 800px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Sidebar */
+
+      .sidebar-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #777;
         margin: 0 0 16px;
-        color: #555;
-        font-size: 14px;
       }
 
-      .nav {
+      .quick-links {
         list-style: none;
         padding: 0;
-        margin: 24px 0 0;
+        margin: 0;
       }
 
-      .nav li {
+      .quick-links li {
         margin-bottom: 8px;
       }
 
-      .nav a {
+      .quick-links a {
         text-decoration: none;
-        color: #007acc;
+        color: #333;
         font-size: 14px;
       }
 
-      .nav a:hover {
+      .quick-links a:hover {
         text-decoration: underline;
       }
 
-      .content {
-        flex: 1;
-        padding: 32px;
-        box-sizing: border-box;
+      /* Home + latest post */
+
+      .hero {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        margin-bottom: 40px;
       }
 
-      .content h1 {
-        margin-top: 0;
+      .hero-title {
+        font-size: 32px;
+        margin: 0 0 8px;
+        font-weight: 700;
       }
+
+      .hero-subtitle {
+        font-size: 18px;
+        margin: 0 0 12px;
+        font-weight: 500;
+      }
+
+      .hero-text {
+        max-width: 640px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .section-heading {
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #777;
+        margin: 0 0 16px;
+      }
+
+      .latest-card {
+        border-top: 1px solid #ddd;
+        padding-top: 16px;
+      }
+
+      .latest-title {
+        font-size: 20px;
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+
+      .latest-meta {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 12px;
+      }
+
+      .latest-excerpt {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 8px;
+      }
+
+      .latest-readmore {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .latest-readmore a {
+        text-decoration: none;
+        color: #007acc;
+      }
+
+      .latest-readmore a:hover {
+        text-decoration: underline;
+      }
+
+      /* Post pages */
 
       .post-meta {
+        font-size: 0.85rem;
+        color: #9ca3af;
         margin: 0 0 8px;
-        color: #777;
-        font-size: 0.9rem;
-      } 
+      }
+
+      .post-content {
+	max-width: 70ch;
+        line-height: 1.7;
+        font-size: 16px;
+      }
+      
+      /* Code blocks */
+
+      .highlight {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 12px;
+        overflow-x: auto;
+        margin: 16px 0;
+      }
+
+      .highlight pre {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  /* Rouge syntax highlighting (GitHub style) */
+
+  .highlight .hll { background-color: #ffffcc }
+  .highlight  { background: #f6f8fa; }
+  .highlight .c { color: #6a737d } /* Comment */
+  .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+  .highlight .k { color: #d73a49 } /* Keyword */
+  .highlight .o { color: #000000 } /* Operator */
+  .highlight .cm { color: #6a737d } /* Comment.Multiline */
+  .highlight .cp { color: #6a737d } /* Comment.Preproc */
+  .highlight .c1 { color: #6a737d } /* Comment.Single */
+  .highlight .cs { color: #6a737d } /* Comment.Special */
+  .highlight .gd { color: #b31d28; background-color: #ffeef0 } /* Deleted */
+  .highlight .ge { font-style: italic } /* Emphasis */
+  .highlight .gr { color: #aa0000 } /* Generic.Error */
+  .highlight .gh { color: #005cc5 } /* Heading */
+  .highlight .gi { color: #22863a; background-color: #f0fff4 } /* Inserted */
+  .highlight .go { color: #6a737d } /* Output */
+  .highlight .gp { color: #6a737d } /* Prompt */
+  .highlight .gs { font-weight: bold } /* Strong */
+  .highlight .gu { color: #6a737d } /* Subheading */
+  .highlight .kc { color: #005cc5 } /* Keyword.Constant */
+  .highlight .kd { color: #d73a49 } /* Keyword.Declaration */
+  .highlight .kn { color: #d73a49 } /* Keyword.Namespace */
+  .highlight .kp { color: #d73a49 } /* Keyword.Pseudo */
+  .highlight .kr { color: #d73a49 } /* Keyword.Reserved */
+  .highlight .kt { color: #005cc5 } /* Keyword.Type */
+  .highlight .m { color: #005cc5 } /* Number */
+  .highlight .s { color: #032f62 } /* String */
+  .highlight .na { color: #6f42c1 } /* Name.Attribute */
+  .highlight .nb { color: #005cc5 } /* Name.Builtin */
+  .highlight .nc { color: #6f42c1 } /* Name.Class */
+  .highlight .no { color: #005cc5 } /* Name.Constant */
+  .highlight .nd { color: #6f42c1 } /* Name.Decorator */
+  .highlight .ni { color: #005cc5 } /* Name.Entity */
+  .highlight .ne { color: #d73a49 } /* Name.Exception */
+  .highlight .nf { color: #6f42c1 } /* Name.Function */
+  .highlight .nn { color: #005cc5 } /* Name.Namespace */
+  .highlight .nt { color: #22863a } /* Name.Tag */
+  .highlight .nv { color: #005cc5 } /* Name.Variable */
+  .highlight .w { color: #bbbbbb } /* Text.Whitespace */
+
     </style>
   </head>
+
   <body>
-    <div class="wrapper">
-<aside class="sidebar">
-  <h1>{{ site.title }}</h1>
-  <p>{{ site.description }}</p>
-
-  <nav>
-    <h2 class="sidebar-section">Navigation</h2>
-    <ul class="nav">
-      <li><a href="{{ '/' | relative_url }}">Home</a></li>
-      <li><a href="{{ '/blog' | relative_url }}">All posts</a></li>
-    </ul>
-
-    <h2 class="sidebar-section">About</h2>
-    <ul class="nav">
-      <li><a href="{{ '/about' | relative_url }}">Curriculum vitae</a></li>
-    </ul>
-
-  </nav>
-</aside>
-
-      <main class="content">
-        {{ content }}
-      </main>
+    <div class="page">
+      <section class="main-grid">
+        {% include sidebar.html %}
+        <main>
+          {{ content }}
+        </main>
+      </section>
     </div>
   </body>
 </html>

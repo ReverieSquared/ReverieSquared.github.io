@@ -1,2 +1,3 @@
-title: "Reverie's homepage"
-description: "Notes, thoughts, about me"
+title: "Reveriee's homepage"
+markdown: kramdown
+highlighter: rouge
